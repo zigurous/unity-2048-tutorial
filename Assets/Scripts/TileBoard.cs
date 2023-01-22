@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameBoard : MonoBehaviour
+public class TileBoard : MonoBehaviour
 {
     public GameManager gameManager;
     public Tile tilePrefab;
