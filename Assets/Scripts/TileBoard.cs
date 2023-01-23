@@ -44,92 +44,29 @@ public class TileBoard : MonoBehaviour
         if (!waiting)
         {
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
-                MoveUp();
+                Move(Vector2Int.up, 0, 1, 1, 1);
             } else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) {
-                MoveLeft();
+                Move(Vector2Int.left, 1, 1, 0, 1);
             } else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) {
-                MoveDown();
+                Move(Vector2Int.down, 0, 1, grid.height - 2, -1);
             } else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
-                MoveRight();
+                Move(Vector2Int.right, grid.width - 2, -1, 0, 1);
             }
         }
     }
 
-    private void MoveLeft()
+    private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
         bool changed = false;
 
-        for (int x = 1; x < grid.width; x++)
+        for (int x = startX; x >= 0 && x < grid.width; x += incrementX)
         {
-            for (int y = 0; y < grid.height; y++)
+            for (int y = startY; y >= 0 && y < grid.height; y += incrementY)
             {
                 TileCell cell = grid.GetCell(x, y);
 
                 if (cell.occupied) {
-                    changed |= MoveTile(cell.tile, Vector2Int.left);
-                }
-            }
-        }
-
-        if (changed) {
-            StartCoroutine(WaitForChanges());
-        }
-    }
-
-    private void MoveRight()
-    {
-        bool changed = false;
-
-        for (int x = grid.width - 2; x >= 0; x--)
-        {
-            for (int y = 0; y < grid.height; y++)
-            {
-                TileCell cell = grid.GetCell(x, y);
-
-                if (cell.occupied) {
-                    changed |= MoveTile(cell.tile, Vector2Int.right);
-                }
-            }
-        }
-
-        if (changed) {
-            StartCoroutine(WaitForChanges());
-        }
-    }
-
-    private void MoveUp()
-    {
-        bool changed = false;
-
-        for (int y = 1; y < grid.height; y++)
-        {
-            for (int x = 0; x < grid.width; x++)
-            {
-                TileCell cell = grid.GetCell(x, y);
-
-                if (cell.occupied) {
-                    changed |= MoveTile(cell.tile, Vector2Int.up);
-                }
-            }
-        }
-
-        if (changed) {
-            StartCoroutine(WaitForChanges());
-        }
-    }
-
-    private void MoveDown()
-    {
-        bool changed = false;
-
-        for (int y = grid.height - 2; y >= 0; y--)
-        {
-            for (int x = 0; x < grid.width; x++)
-            {
-                TileCell cell = grid.GetCell(x, y);
-
-                if (cell.occupied) {
-                    changed |= MoveTile(cell.tile, Vector2Int.down);
+                    changed |= MoveTile(cell.tile, direction);
                 }
             }
         }
@@ -179,7 +116,6 @@ public class TileBoard : MonoBehaviour
     {
         tiles.Remove(a);
         a.Merge(b.cell);
-
 
         int index = Mathf.Clamp(IndexOf(b.state) + 1, 0, tileStates.Length - 1);
         int number = b.number * 2;
