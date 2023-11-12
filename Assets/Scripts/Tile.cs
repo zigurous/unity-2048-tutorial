@@ -7,8 +7,6 @@ public class Tile : MonoBehaviour
 {
     public TileState state { get; private set; }
     public TileCell cell { get; private set; }
-
-    public int number { get; private set; }
     public bool locked { get; set; }
 
     private Image background;
@@ -20,14 +18,13 @@ public class Tile : MonoBehaviour
         text = GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    public void SetState(TileState state, int number)
+    public void SetState(TileState state)
     {
         this.state = state;
-        this.number = number;
 
         background.color = state.backgroundColor;
         text.color = state.textColor;
-        text.text = number.ToString();
+        text.text = state.number.ToString();
     }
 
     public void Spawn(TileCell cell)

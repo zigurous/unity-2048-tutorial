@@ -34,7 +34,7 @@ public class TileBoard : MonoBehaviour
     public void CreateTile()
     {
         Tile tile = Instantiate(tilePrefab, grid.transform);
-        tile.SetState(tileStates[0], 2);
+        tile.SetState(tileStates[0]);
         tile.Spawn(grid.GetRandomEmptyCell());
         tiles.Add(tile);
     }
@@ -109,7 +109,7 @@ public class TileBoard : MonoBehaviour
 
     private bool CanMerge(Tile a, Tile b)
     {
-        return a.number == b.number && !b.locked;
+        return a.state == b.state && !b.locked;
     }
 
     private void MergeTiles(Tile a, Tile b)
@@ -118,11 +118,10 @@ public class TileBoard : MonoBehaviour
         a.Merge(b.cell);
 
         int index = Mathf.Clamp(IndexOf(b.state) + 1, 0, tileStates.Length - 1);
-        int number = b.number * 2;
+        TileState newState = tileStates[index];
 
-        b.SetState(tileStates[index], number);
-
-        gameManager.IncreaseScore(number);
+        b.SetState(newState);
+        gameManager.IncreaseScore(newState.number);
     }
 
     private int IndexOf(TileState state)
