@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameBoard board;
+    public TileBoard board;
     public CanvasGroup gameOver;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI hiscoreText;
