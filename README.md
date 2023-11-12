@@ -6,4 +6,4 @@
 - **Topics**: UI, Grid Logic, Animation
 - **Version**: 2021.3 (LTS)
 - [**Download**](https://github.com/zigurous/unity-2048-tutorial/archive/refs/heads/main.zip)
-- [**Watch Video**](https://youtu.be/9qaPLKr211o)
+- [**Watch Video**](https://youtu.be/4NFZwPhqeRs)
