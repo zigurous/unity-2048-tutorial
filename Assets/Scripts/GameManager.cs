@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public TileBoard board;
-    public CanvasGroup gameOver;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI hiscoreText;
+    public static GameManager Instance { get; private set; }
+
+    [SerializeField] private TileBoard board;
+    [SerializeField] private CanvasGroup gameOver;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI hiscoreText;
 
     private int score;
+
+    private void Awake()
+    {
+        if (Instance != null) {
+            DestroyImmediate(gameObject);
+        } else {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     private void Start()
     {

@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class TileBoard : MonoBehaviour
 {
-    public GameManager gameManager;
-    public Tile tilePrefab;
-    public TileState[] tileStates;
+    [SerializeField] private Tile tilePrefab;
+    [SerializeField] private TileState[] tileStates;
 
     private TileGrid grid;
     private List<Tile> tiles;
@@ -48,9 +47,9 @@ public class TileBoard : MonoBehaviour
             } else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) {
                 Move(Vector2Int.left, 1, 1, 0, 1);
             } else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) {
-                Move(Vector2Int.down, 0, 1, grid.height - 2, -1);
+                Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
             } else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
-                Move(Vector2Int.right, grid.width - 2, -1, 0, 1);
+                Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
             }
         }
     }
@@ -59,13 +58,13 @@ public class TileBoard : MonoBehaviour
     {
         bool changed = false;
 
-        for (int x = startX; x >= 0 && x < grid.width; x += incrementX)
+        for (int x = startX; x >= 0 && x < grid.Width; x += incrementX)
         {
-            for (int y = startY; y >= 0 && y < grid.height; y += incrementY)
+            for (int y = startY; y >= 0 && y < grid.Height; y += incrementY)
             {
                 TileCell cell = grid.GetCell(x, y);
 
-                if (cell.occupied) {
+                if (cell.Occupied) {
                     changed |= MoveTile(cell.tile, direction);
                 }
             }
@@ -83,7 +82,7 @@ public class TileBoard : MonoBehaviour
 
         while (adjacent != null)
         {
-            if (adjacent.occupied)
+            if (adjacent.Occupied)
             {
                 if (CanMerge(tile, adjacent.tile))
                 {
@@ -121,7 +120,7 @@ public class TileBoard : MonoBehaviour
         TileState newState = tileStates[index];
 
         b.SetState(newState);
-        gameManager.IncreaseScore(newState.number);
+        GameManager.Instance.IncreaseScore(newState.number);
     }
 
     private int IndexOf(TileState state)
@@ -148,18 +147,18 @@ public class TileBoard : MonoBehaviour
             tile.locked = false;
         }
 
-        if (tiles.Count != grid.size) {
+        if (tiles.Count != grid.Size) {
             CreateTile();
         }
 
         if (CheckForGameOver()) {
-            gameManager.GameOver();
+            GameManager.Instance.GameOver();
         }
     }
 
     public bool CheckForGameOver()
     {
-        if (tiles.Count != grid.size) {
+        if (tiles.Count != grid.Size) {
             return false;
         }
 
