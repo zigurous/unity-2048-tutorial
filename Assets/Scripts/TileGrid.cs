@@ -13,16 +13,9 @@ public class TileGrid : MonoBehaviour
     {
         rows = GetComponentsInChildren<TileRow>();
         cells = GetComponentsInChildren<TileCell>();
-    }
 
-    private void Start()
-    {
-        for (int i = 0; i < rows.Length; i++)
-        {
-            for (int j = 0; j < rows[i].cells.Length; j++)
-            {
-                rows[i].cells[j].coordinates = new Vector2Int(j, i);
-            }
+        for (int i = 0; i < cells.Length; i++) {
+            cells[i].coordinates = new Vector2Int(i % width, i / width);
         }
     }
 
