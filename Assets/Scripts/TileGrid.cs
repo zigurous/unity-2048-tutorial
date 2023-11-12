@@ -52,7 +52,7 @@ public class TileGrid : MonoBehaviour
     public TileCell GetRandomEmptyCell()
     {
         int index = Random.Range(0, cells.Length);
-        int originalIndex = index;
+        int startingIndex = index;
 
         while (cells[index].occupied)
         {
@@ -63,7 +63,7 @@ public class TileGrid : MonoBehaviour
             }
 
             // all cells are occupied
-            if (index == originalIndex) {
+            if (index == startingIndex) {
                 return null;
             }
         }

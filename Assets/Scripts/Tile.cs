@@ -49,7 +49,7 @@ public class Tile : MonoBehaviour
         }
 
         this.cell = cell;
-        cell.tile = this;
+        this.cell.tile = this;
 
         StartCoroutine(Animate(cell.transform.position, false));
     }
