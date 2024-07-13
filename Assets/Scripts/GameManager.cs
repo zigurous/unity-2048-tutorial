@@ -11,8 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI hiscoreText;
 
-    private int score;
-    public int Score => score;
+    public int score { get; private set; }
 
     private void Awake()
     {
