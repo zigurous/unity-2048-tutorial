@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI hiscoreText;
 
-    public int score { get; private set; }
+    public int score { get; private set; } = 0;
 
     private void Awake()
     {
