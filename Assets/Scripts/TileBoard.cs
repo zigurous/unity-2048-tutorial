@@ -40,17 +40,16 @@ public class TileBoard : MonoBehaviour
 
     private void Update()
     {
-        if (!waiting)
-        {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
-                Move(Vector2Int.up, 0, 1, 1, 1);
-            } else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) {
-                Move(Vector2Int.left, 1, 1, 0, 1);
-            } else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) {
-                Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
-            } else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
-                Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
-            }
+        if (waiting) return;
+
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
+            Move(Vector2Int.up, 0, 1, 1, 1);
+        } else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) {
+            Move(Vector2Int.left, 1, 1, 0, 1);
+        } else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) {
+            Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
+        } else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
+            Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
         }
     }
 
