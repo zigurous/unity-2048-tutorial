@@ -23,6 +23,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        if (Instance == this) {
+            Instance = null;
+        }
+    }
+
     private void Start()
     {
         NewGame();
